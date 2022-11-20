@@ -49,4 +49,10 @@
 
 .filters-input {
   padding: 6px 0px;
+}
+
+@media (max-width: 480px) {
+  .filters-main {
+    display: none;
+  }
 }/*# sourceMappingURL=Filters.css.map */
