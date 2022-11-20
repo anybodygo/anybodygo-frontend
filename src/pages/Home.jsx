@@ -11,9 +11,17 @@ export default function Home() {
     const getQueryParams = () => window.location.search
         .replace('?', '')
         .split('&')
-        .reduce((r,e) => (r[e.split('=')[0]] = decodeURIComponent(e.split('=')[1]), r), {});
+        .map(item => {
+            const data = item.split('=');
+            if (data.length && data[0] === 'hash') {
+                return {hash: data[1]}
+            }
+            return {};
+        });
 
-    const { hash } = getQueryParams();
+    const queryData = getQueryParams();
+
+    const hash = queryData.length && Object.keys(queryData[0]).includes('hash') ? queryData[0]['hash'] : null;
 
     const navigate = useNavigate();
 
