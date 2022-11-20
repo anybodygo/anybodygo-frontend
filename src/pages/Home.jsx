@@ -20,6 +20,9 @@ export default function Home() {
         <div className='home-container'>
             <Filters />
             <div className='cards-container'>
+                {requests.map((request, key) => (
+                    <Card key={key} {...request}/>
+                ))}
                 <Card />
                 <Card />
                 <Card />

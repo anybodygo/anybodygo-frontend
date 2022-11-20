@@ -19,23 +19,23 @@ export default function Filters() {
     <div className='filters-main'>
         <span className='filters-title'>Filters</span>
         <form className='filters-form'>
-            <label className='filters-label' for="from">From</label>
+            <label className='filters-label' htmlFor="from">From</label>
             <input className='filters-field filters-input' id="from">
             </input>
 
-            <label className='filters-label' for="to">To</label>
+            <label className='filters-label' htmlFor="to">To</label>
             <input className='filters-field filters-input' id="to">
             </input>
 
-            <label className='filters-label' for="departure">Departure date</label>
+            <label className='filters-label' htmlFor="departure">Departure date</label>
             <input className='filters-field filters-input' id="departure">
             </input>
 
-            <label className='filters-label' for="arrival">Arrival date</label>
+            <label className='filters-label' htmlFor="arrival">Arrival date</label>
             <input className='filters-field filters-input' id="arrival">
             </input>
 
-            <label className='filters-label' for="weight">Size of delivarable</label>
+            <label className='filters-label' htmlFor="weight">Size of delivarable</label>
             <select className='filters-field' id="weight">
                 <option>Up to 1kg</option>
                 <option>2kg</option>
