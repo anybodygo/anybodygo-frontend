@@ -3,7 +3,6 @@
 
 .filters-main 
     width: 20%
-    margin-left: 15vw
     display: flex
     flex-direction: column
 
@@ -65,19 +64,31 @@
         color: #0F766E
         border: 1px solid #14B8A6
 
-
-
-
-
 .reward-filter-btn-left
     border-radius: 6px 0px 0px 6px
 
 .reward-filter-btn-right
-    border-radius: 0px 6px 6px 0px
-    
-    
+    border-radius: 0px 6px 6px 0px   
 
 @media (max-width: 480px) 
     .filters-main
         display: none
+    .filters-main-mobile
+        width: 100%
+        margin-top: 1rem
+        position: absolute
+        display: flex
+        flex-direction: column
+        .filters-label
+            margin-left: 3rem
+        .filters-field
+            width: 80%
+            margin-left: 3rem
+        .reward-choice-container
+            width: 80%
+            margin-left: 3rem
+
+
+
+
 

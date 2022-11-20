@@ -7,7 +7,7 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         const redirectWindow = window.open(link, '_blank');
         redirectWindow.focus();
     }
-    
+
   return (
     <div className='card-main'>
         <div className='card-title'>

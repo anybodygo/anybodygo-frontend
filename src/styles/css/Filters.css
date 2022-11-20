@@ -1,6 +1,5 @@
 .filters-main {
   width: 20%;
-  margin-left: 15vw;
   display: flex;
   flex-direction: column;
 }
@@ -92,5 +91,23 @@
 @media (max-width: 480px) {
   .filters-main {
     display: none;
+  }
+  .filters-main-mobile {
+    width: 100%;
+    margin-top: 1rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+  }
+  .filters-main-mobile .filters-label {
+    margin-left: 3rem;
+  }
+  .filters-main-mobile .filters-field {
+    width: 80%;
+    margin-left: 3rem;
+  }
+  .filters-main-mobile .reward-choice-container {
+    width: 80%;
+    margin-left: 3rem;
   }
 }/*# sourceMappingURL=Filters.css.map */
