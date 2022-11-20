@@ -15,7 +15,9 @@ code {
 }
 
 .App {
-    width: 100vw;
     display: flex;
     justify-content: center;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
