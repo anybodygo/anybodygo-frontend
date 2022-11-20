@@ -28,6 +28,7 @@ export default function Home() {
 
     function openFilters() {
         setShowFilters(prev => !prev);
+        console.log(showFilters);
     }
 
     function filtrate() {

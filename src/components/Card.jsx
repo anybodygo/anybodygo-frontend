@@ -1,7 +1,13 @@
 import React from 'react'
 import "../styles/css/Card.css";
 
-export default function Card({ chatId, from, to, dateFrom, dateTo, message, context, isRewardable }) {
+export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link }) {
+    const redirectTo = (link) => {
+        console.debug(`redirecting to ${link}`)
+        const redirectWindow = window.open(link, '_blank');
+        redirectWindow.focus();
+    }
+    
   return (
     <div className='card-main'>
         <div className='card-title'>
@@ -62,11 +68,11 @@ export default function Card({ chatId, from, to, dateFrom, dateTo, message, cont
                 { dateFrom } - { dateTo }
             </span>
         </div>
-        <div className='card-subheader'>Chat ID: { chatId }</div>
+        <div className='card-subheader' onClick={() => redirectTo(chatLink)}>{ chatName }</div>
         <div className='card-text'>
             { context }
         </div>
-        <button className='respond-btn'>Respond in Telegram</button>
+        <button className='respond-btn' onClick={() => redirectTo(link)}>Respond in Telegram</button>
         {isRewardable &&
             <div className='card-reward'>
                 <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
