@@ -75,9 +75,6 @@ export default function Card({ chatId, from, to, dateFrom, dateTo, message, cont
                 Rewardable
             </div>
         }
-
-
-
     </div>
   )
 }

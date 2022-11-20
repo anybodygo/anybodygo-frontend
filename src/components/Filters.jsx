@@ -11,10 +11,6 @@ export default function Filters() {
         e.target.classList.add('active')
     }
 
-
-
-
-
   return (
     <div className='filters-main'>
         <span className='filters-title'>Filters</span>
