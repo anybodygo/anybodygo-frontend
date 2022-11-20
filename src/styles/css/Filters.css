@@ -93,4 +93,22 @@
   .filters-main {
     display: none;
   }
+  .filters-main-mobile {
+    width: 100%;
+    margin-top: 1rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+  }
+  .filters-main-mobile .filters-label {
+    margin-left: 4rem;
+  }
+  .filters-main-mobile .filters-field {
+    width: 60%;
+    margin-left: 4rem;
+  }
+  .filters-main-mobile .reward-choice-container {
+    width: 60%;
+    margin-left: 4rem;
+  }
 }/*# sourceMappingURL=Filters.css.map */

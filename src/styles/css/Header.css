@@ -50,4 +50,8 @@
     background: #F0FDFA;
     margin-right: 15vw;
   }
+  .filter-btn-active {
+    color: white;
+    background: #0D9488;
+  }
 }/*# sourceMappingURL=Header.css.map */
