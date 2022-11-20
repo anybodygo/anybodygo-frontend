@@ -24,6 +24,7 @@ export default function Home() {
 
     const openFilters = () => {
         setShowFilters(prev => !prev);
+        console.log(showFilters);
     }
 
 
