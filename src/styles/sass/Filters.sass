@@ -4,7 +4,6 @@
 .filters-main 
     width: 20%
     margin-left: 15vw
-    border: solid black 1px
     display: flex
     flex-direction: column
 
@@ -29,7 +28,7 @@
     appearance: none
     display: flex
     align-items: center
-    padding: 6px 13px 6px 17px
+    padding: 6px 12px
     gap: 8px
     background: white
     margin: 0
@@ -44,8 +43,39 @@
     border-radius: 2px
 
 .filters-input
-    padding: 6px 0px
+    padding: 6px 12px
 
+.reward-choice-container
+    height: 3rem
+    align-content: stretch
+    width: 90%
+    display: flex
+    
+.reward-filter-btn
+    flex-grow: 1
+    border: none
+    @include mixins.button-1
+    flex-grow: 1
+    border-radius: 0
+    background: white
+    border: 1px solid #D1D5DB
+    cursor: pointer
+    &.active
+        background: #EFF6FF
+        color: #0F766E
+        border: 1px solid #14B8A6
+
+
+
+
+
+.reward-filter-btn-left
+    border-radius: 6px 0px 0px 6px
+
+.reward-filter-btn-right
+    border-radius: 0px 6px 6px 0px
+    
+    
 
 @media (max-width: 480px) 
     .filters-main

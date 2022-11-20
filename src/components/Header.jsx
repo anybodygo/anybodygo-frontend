@@ -1,7 +1,7 @@
 import React from 'react'
 import "../styles/css/Header.css";
 
-export default function Header() {
+export default function Header(openFilters = f => f) {
     return (
         <div className='header-main'>
             <div className='title'>AnybodyGo
@@ -13,7 +13,7 @@ export default function Header() {
                 </svg>
             </div>
             <span>Bring an important thing with you to someone in need</span>
-            <button className='filter-btn'> 
+            <button onClick={()=>openFilters()} className='filter-btn'> 
                 <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1.5 2C1.5 1.44772 1.94772 1 2.5 1H12.5C13.0523 1 13.5 1.44772 13.5 2V3.25245C13.5 3.51767 13.3946 3.77202 13.2071 3.95956L9.12623 8.04044C8.93869 8.22798 8.83333 8.48233 8.83333 8.74755V10.3333L6.16667 13V8.74755C6.16667 8.48233 6.06131 8.22798 5.87377 8.04044L1.79289 3.95956C1.60536 3.77202 1.5 3.51767 1.5 3.25245V2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>

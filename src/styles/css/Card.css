@@ -75,6 +75,9 @@
   right: 24px;
   cursor: pointer;
 }
+.respond-btn:hover {
+  background: rgb(45, 212, 191);
+}
 
 .card-reward {
   border: none;
