@@ -13,6 +13,8 @@ export default function Home() {
     //array of cards that will be displayed after filtration
     const [cards, setCards] = useState([...requests])
 
+    
+
 
     // useEffect(() => {
     //     fetch(process.env.REACT_APP_API_PREFIX + "/api/requests")

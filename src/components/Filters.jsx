@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState, forwardRef} from 'react'
 import "../styles/css/Filters.css"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Filters(showFilters) {
 //styling, ignore it
@@ -10,6 +12,16 @@ export default function Filters(showFilters) {
         activeLink.classList.remove('active')
         e.target.classList.add('active')
     }
+
+//datepickers
+const [fromDate, setFromDate] = useState(new Date());
+const [toDate, setToDate] = useState(new Date());
+const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button className="filters-field" onClick={(e)=> {e.preventDefault(); onClick()}} ref={ref}>
+      {value}
+    </button>
+  ));
+
 
 
 
@@ -72,12 +84,12 @@ export default function Filters(showFilters) {
             </select>
 
             <label className='filters-label' htmlFor="departure">Departure date</label>
-            <input className='filters-field filters-input' id="departure">
-            </input>
+            <DatePicker selected={fromDate} onChange={(date) => setFromDate(date)} customInput={<ExampleCustomInput />}/>
+
+
 
             <label className='filters-label' htmlFor="arrival">Arrival date</label>
-            <input className='filters-field filters-input' id="arrival">
-            </input>
+            <DatePicker selected={toDate} onChange={(date) => setToDate(date)} customInput={<ExampleCustomInput />} />
 
             <label className='filters-label' htmlFor="weight">Size of delivarable</label>
             <select className='filters-field' id="weight">
