@@ -19,7 +19,7 @@ export default function CardPopup({ id }) {
             .catch(error => {
                 console.error(error);
             })
-    }, []);
+    }, [id]);
 
     return (
         <Popup open={!!id} position="right center" onClose={() => navigate('/')} className='popup-card'>

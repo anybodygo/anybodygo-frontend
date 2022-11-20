@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 
 export default function Home() {
+    // eslint-disable-next-line no-sequences
     const getQueryParams = () => window.location.search
         .replace('?', '')
         .split('&')
@@ -50,10 +51,6 @@ export default function Home() {
     const openFilters = () => {
         setShowFilters(prev => !prev);
         console.log(showFilters);
-    }
-
-    function filtrate() {
-        
     }
     
 
