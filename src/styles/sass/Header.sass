@@ -1,0 +1,46 @@
+@use './_mixins.sass'
+@import './variables.sass'
+
+
+.header-main
+    width: 100%
+    height: 65px
+    background: white
+    display: flex
+    align-items: center
+    
+
+.title
+    font-weight: 700
+    font-size: 17.17px
+    position: relative
+    margin-left: 15vw
+
+.title > svg
+    margin-left: 5px
+    transform: translateY(1px)
+    color: black
+
+.header-main > span
+    font-size: 16px
+    color: $n-gray
+    margin-left: 3rem
+
+.filter-btn
+    display: none
+
+@media (max-width: 480px) 
+    .header-main
+        justify-content: space-between
+    .header-main > span
+        display: none
+    .filter-btn
+        @include mixins.button-1
+        color: $teal
+        background: $shallow-green
+        margin-right: 15vw
+    
+
+
+
+
