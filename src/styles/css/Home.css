@@ -1,7 +1,11 @@
 .home-main {
   width: 100%;
-  height: 100vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   display: column;
+  max-width: 1200px;
+  overflow-x: visible;
 }
 
 .home-container {
@@ -10,6 +14,8 @@
   height: fit-content;
   width: 100%;
   display: flex;
+  margin-top: 80px;
+  justify-content: center;
 }
 
 .filter {

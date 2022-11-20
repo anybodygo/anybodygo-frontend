@@ -1,6 +1,5 @@
 .filters-main {
   width: 20%;
-  margin-left: 15vw;
   display: flex;
   flex-direction: column;
 }
@@ -101,14 +100,14 @@
     flex-direction: column;
   }
   .filters-main-mobile .filters-label {
-    margin-left: 4rem;
+    margin-left: 3rem;
   }
   .filters-main-mobile .filters-field {
-    width: 60%;
-    margin-left: 4rem;
+    width: 80%;
+    margin-left: 3rem;
   }
   .filters-main-mobile .reward-choice-container {
-    width: 60%;
-    margin-left: 4rem;
+    width: 80%;
+    margin-left: 3rem;
   }
 }/*# sourceMappingURL=Filters.css.map */
