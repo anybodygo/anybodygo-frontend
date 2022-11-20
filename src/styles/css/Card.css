@@ -1,7 +1,7 @@
 .popup-content {
   border-radius: 1rem !important;
   width: 684px !important;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 2rem;
   align-items: center;
@@ -17,6 +17,10 @@
 
 .popup-content .popup-header {
   padding: 1rem;
+}
+
+.card-container > .card-main {
+  width: 630px;
 }
 
 .card-main {
