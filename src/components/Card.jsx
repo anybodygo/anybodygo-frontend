@@ -1,9 +1,9 @@
 import React from 'react'
 import "../styles/css/Card.css";
 
-export default function Card({ chatId, from, to, dateFrom, dateTo, message, context, isRewardable }) {
+export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link }) {
   return (
-    <div className='card-main'>
+    <div className='card-main' onClick={() => (window.location.href = link)}>
         <div className='card-title'>
             <span>{ from }</span>
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@ export default function Card({ chatId, from, to, dateFrom, dateTo, message, cont
                 { dateFrom } - { dateTo }
             </span>
         </div>
-        <div className='card-subheader'>Chat ID: { chatId }</div>
+        <div className='card-subheader' onClick={() => (window.location.href = chatLink)}>{ chatName }</div>
         <div className='card-text'>
             { context }
         </div>
