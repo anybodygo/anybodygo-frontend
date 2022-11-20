@@ -27,7 +27,7 @@ export default function CardPopup({ id }) {
                 <div style={{display: 'flex'}} className='popup-header'>
                     <span>Request details</span>
                     <div style={{marginLeft: 'auto', display: 'flex'}}></div>
-                    <span style={{fontSize: '20px', cursor: 'pointer'}} onClose={() => navigate('/')}>x</span>
+                    <div style={{fontSize: '20px', cursor: 'pointer', display: 'flex'}} onClick={() => navigate('/')}>x</div>
                 </div>
                 <hr/>
                 <div>

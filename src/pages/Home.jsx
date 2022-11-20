@@ -22,23 +22,30 @@ export default function Home() {
             navigate(`/requests/${hash}`)
         }
     }, [hash, navigate])
+
+    const [requests, setRequests] = useState([]);
+
+    useEffect(() => {
+        fetch(process.env.REACT_APP_API_PREFIX + "/api/requests")
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setRequests(data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
+    }, []);
+
+    useEffect(() => {
+        setCards(requests);
+    }, [requests])
+
     //array of cards that will be displayed after filtration
     const [cards, setCards] = useState([...requests])
 
     const [showFilters, setShowFilters] = useState(false);
-
-    // useEffect(() => {
-    //     fetch(process.env.REACT_APP_API_PREFIX + "/api/requests")
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             setRequests(data);
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         })
-
-    // }, []);
 
     const openFilters = () => {
         setShowFilters(prev => !prev);
