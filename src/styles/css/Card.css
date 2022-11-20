@@ -1,3 +1,24 @@
+.popup-content {
+  border-radius: 1rem !important;
+  width: 684px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 24px;
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    width: 100vw;
+    margin-top: 14px;
+  }
+}
+
+.popup-content .popup-header {
+  padding: 1rem;
+}
+
 .card-main {
   display: flex;
   flex-direction: column;
@@ -39,6 +60,7 @@
   font-size: 14px;
   font-weight: 600;
   margin-top: 1.5rem;
+  cursor: pointer;
 }
 
 .card-text {
