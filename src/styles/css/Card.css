@@ -7,6 +7,9 @@
   align-items: center;
   margin-top: 24px;
 }
+.popup-content .popup-header {
+  padding: 1rem;
+}
 
 @media (max-width: 480px) {
   .popup-content {
@@ -14,11 +17,6 @@
     margin-top: 14px;
   }
 }
-
-.popup-content .popup-header {
-  padding: 1rem;
-}
-
 .card-main {
   display: flex;
   flex-direction: column;

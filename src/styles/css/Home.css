@@ -6,6 +6,7 @@
   display: column;
   max-width: 1200px;
   overflow-x: visible;
+  padding-bottom: 5rem;
 }
 
 .home-container {

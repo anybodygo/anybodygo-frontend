@@ -53,21 +53,17 @@ export default function Home() {
             'to': null,
             'dateFrom': null,
             'dateTo': null,
-            "isRewardable": null,
+            "isRewardable": null
         });
 
-        console.log(filtrationParams);
         
     const openFilters = () => {
         setShowFilters(prev => !prev);
     }
 
-    useEffect(()=> {
-        console.log('and i do work')
-    }, [filtrationParams])
+
 
     useEffect(() => {
-        console.log('i ran')
         let allArray = requests;
         let fil = filtrationParams;
         let newArray = allArray.filter(function (el) {
@@ -78,7 +74,7 @@ export default function Home() {
                    ((el.isRewardable == fil.isRewardable) || fil.isRewardable === null);
           });
         setCards(newArray)        
-    }, [filtrationParams])
+    }, [filtrationParams, requests])
     
 
   return (
@@ -88,6 +84,11 @@ export default function Home() {
             <Filters open = {showFilters} setFiltrationParams = {setFiltrationParams}/>
            
            {showFilters ? '' : <div className='cards-container'>
+                {cards.length === 0 ? 
+                    <div >
+                       <span>Unfortunately, there are no results for your query. Try changing the filters</span>
+                    </div> 
+                 : ''}
                 {cards.map((request, key) => (
                     <Card key={key} {...request}/>
                 ))}
