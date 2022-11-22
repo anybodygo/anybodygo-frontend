@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useEffect} from 'react'
+import React, {useState, forwardRef} from 'react'
 import "../styles/css/Filters.css"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,12 +19,18 @@ export default function Filters({ setFiltrationParams = f => f, active }) {
     const [fromDate, setFromDate] = useState(new Date());
     const [toDate, setToDate] = useState(new Date());
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-        <button className="filters-field" onClick={(e)=> {e.preventDefault(); onClick()}} ref={ref}>
-          {value}
+        <button className="filters-field" onClick={(e)=> 
+            {e.preventDefault(); onClick()}} ref={ref}> 
+            {value}
         </button>
       ));
 
-      
+      const destinations = ['Almaty', 'Antalya', 'Bali', 'Bangkok', 'Europe', 'Kas', 'Kazan', 
+                            'Krasnodar', 'Minsk', 'Moscow', 'Novosibirsk', 'Pangan', 'Rostov-on-Don', 
+                            'Russia', 'Seoul', 'Sheremetyevo', 'St.Petersburg', 'Sydney', 'Thailand', 
+                            'Turkey', 'Warsaw', 'Yekaterinburg']
+
+
   //filtration
 function setFilters(name, newValue) {
     //stringify the dates
@@ -44,57 +50,19 @@ function setFilters(name, newValue) {
         {active? '' : <span className='filters-title'>Filters</span>}
         <form className='filters-form'>
             <label className='filters-label' htmlFor="from">From</label>
-            <select required onChange={(e)=> setFilters(e.target.id, e.target.value)} className='filters-field filters-input' id="from">
-                <option value="" disabled selected hidden>Select</option>
-                <option>Almaty</option>  
-                <option>Antalya</option>
-                <option>Bali</option>
-                <option>Bangkok</option>
-                <option>Europe</option>
-                <option>Kas</option>
-                <option>Kazan</option>
-                <option>Krasnodar</option>
-                <option>Minsk</option>
-                <option>Moscow</option>
-                <option>Novosibirsk</option>
-                <option>Pangan</option>
-                <option>Rostov-on-Don</option>
-                <option>Russia</option>
-                <option>Seoul</option>
-                <option>Sheremetyevo</option>
-                <option>St.Petersburg</option>
-                <option>Sydney</option>
-                <option>Thailand</option>
-                <option>Turkey</option>
-                <option>Warsaw</option>
-                <option>Yekaterinburg</option>
+            <select required 
+                onChange={(e)=> setFilters(e.target.id, e.target.value)} 
+                className='filters-field filters-input' id="from">
+                    <option value="" disabled selected hidden>Select</option>
+                    {destinations.map(item => <option>{item}</option>)}
             </select>
 
             <label className='filters-label' htmlFor="to">To</label>
-            <select required placeholder='Choose the start' onChange={(e)=> setFilters(e.target.id, e.target.value)} className='filters-field filters-input' id="to">
-                <option value="" disabled selected hidden>Select</option>
-                <option>Almaty</option>  
-                <option>Antalya</option>
-                <option>Bali</option>
-                <option>Bangkok</option>
-                <option>Europe</option>
-                <option>Kas</option>
-                <option>Kazan</option>
-                <option>Krasnodar</option>
-                <option>Minsk</option>
-                <option>Moscow</option>
-                <option>Novosibirsk</option>
-                <option>Pangan</option>
-                <option>Rostov-on-Don</option>
-                <option>Russia</option>
-                <option>Seoul</option>
-                <option>Sheremetyevo</option>
-                <option>St.Petersburg</option>
-                <option>Sydney</option>
-                <option>Thailand</option>
-                <option>Turkey</option>
-                <option>Warsaw</option>
-                <option>Yekaterinburg</option>
+            <select required 
+                onChange={(e)=> setFilters(e.target.id, e.target.value)} 
+                className='filters-field filters-input' id="to">
+                    <option value="" disabled selected hidden>Select</option>
+                    {destinations.map(item=> <option>{item}</option>)}
             </select>
 
             <label className='filters-label' htmlFor="departure">Departure date</label>
@@ -125,9 +93,12 @@ function setFilters(name, newValue) {
 
             <label className='filters-label' for="reward">Reward</label>
             <div className='reward-choice-container'>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', true)}} className='reward-filter-btn reward-filter-btn-left '>Yes</button>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', false)}} className='reward-filter-btn'>No</button>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', null)}} className='reward-filter-btn reward-filter-btn-right' >N/A</button>
+                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', true)}} 
+                        className='reward-filter-btn reward-filter-btn-left '>Yes</button>
+                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', false)}} 
+                        className='reward-filter-btn'>No</button>
+                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', null)}} 
+                        className='reward-filter-btn reward-filter-btn-right' >N/A</button>
             </div>
         </form>
     </div>

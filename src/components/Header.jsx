@@ -3,8 +3,10 @@ import "../styles/css/Header.css";
 
 export default function Header({openFilters = f => f}) {
     return (
+        <div className='header-4K'>
+        <div className='header-align-container'>
         <div className='header-main'>
-            <div className='title'>AnybodyGo
+            <div className='header-title'>AnybodyGo
                 <svg width="25" height="15" viewBox="0 0 25 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.2292 15C3.75367 15 3.34538 14.828 3.00433 14.484C2.66329 14.135 2.49517 13.7173 2.49998 13.2308C2.49517 12.7492 2.66329 12.3364 3.00433 11.9923C3.34538 11.6483 3.75367 11.4763 4.2292 11.4763C4.68553 11.4763 5.08661 11.6483 5.43245 11.9923C5.77829 12.3364 5.95362 12.7492 5.95843 13.2308C5.95362 13.5551 5.86956 13.8524 5.70625 14.1227C5.54773 14.3881 5.33879 14.6019 5.07941 14.7641C4.82002 14.9213 4.53662 15 4.2292 15Z" fill="#1F2937"/>
                 <path d="M1.25 1.25H12.8995V9.09484H1.25V1.25Z" stroke="#1F2937" strokeWidth="2.5"/>
@@ -19,6 +21,8 @@ export default function Header({openFilters = f => f}) {
                 </svg>
                 Filter
             </button>
+        </div>
+        </div>
         </div>
     )
 }
