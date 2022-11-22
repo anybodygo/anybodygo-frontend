@@ -19,7 +19,7 @@ export default function CardPopup({ id }) {
             .catch(error => {
                 console.error(error);
             })
-    }, []);
+    }, [id]);
 
     return (
         <Popup open={!!id} position="right center" onClose={() => navigate('/')} className='popup-card'>
@@ -30,7 +30,7 @@ export default function CardPopup({ id }) {
                     <div style={{fontSize: '20px', cursor: 'pointer', display: 'flex'}} onClick={() => navigate('/')}>x</div>
                 </div>
                 <hr/>
-                <div>
+                <div className='card-container'>
                     <Card {...request}/>
                 </div>
             </div>
