@@ -1,4 +1,4 @@
-import React, {useState, forwardRef, useEffect} from 'react'
+import React, {useState, forwardRef} from 'react'
 import "../styles/css/Filters.css"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
