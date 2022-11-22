@@ -64,11 +64,12 @@
 .card-text {
   padding: 0;
   margin: 0;
-  width: 70%;
+  width: 90%;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #374151;
+  margin-bottom: 45px;
 }
 
 .respond-btn {
@@ -89,8 +90,8 @@
   width: fit-content;
   background: #5EEAD4;
   color: black;
-  padding: 10px 16px;
   position: absolute;
+  padding: 10px 16px;
   bottom: 24px;
   right: 24px;
   cursor: pointer;

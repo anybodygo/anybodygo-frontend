@@ -27,7 +27,7 @@ export default function Filters(props) {
   //filtration
 function setFilters(name, newValue) {
     //stringify the dates
-    if (typeof(newValue) === 'object') {
+    if (newValue !== null && typeof(newValue) === 'object') {
         const month = newValue.getUTCMonth() + 1; 
         const day = newValue.getUTCDate();
         const year = newValue.getUTCFullYear();
