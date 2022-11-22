@@ -2,13 +2,14 @@ import React, {useState, forwardRef, useEffect} from 'react'
 import "../styles/css/Filters.css"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
+import * as dayjs from "dayjs";
 
-export default function Filters(props) {
+export default function Filters({ setFiltrationParams = f => f, active }) {
 //styling, ignore it
     function buttonStyle(e) {
         e.preventDefault();
         // activeLink = document.querySelector("button.active");
-        if (document.querySelector("button.active")){
+        if (document.querySelector("button.active")) {
             document.querySelector("button.active").classList.remove('active')
         }
         e.target.classList.add('active')
@@ -28,12 +29,10 @@ export default function Filters(props) {
 function setFilters(name, newValue) {
     //stringify the dates
     if (newValue !== null && typeof(newValue) === 'object') {
-        const month = newValue.getUTCMonth() + 1; 
-        const day = newValue.getUTCDate();
-        const year = newValue.getUTCFullYear();
-        newValue = year + "-" + month + "-" + day;
+        newValue = dayjs(newValue).format('DD-MM-YYYY');
+        console.log(newValue);
     }
-    props.setFiltrationParams(prevState => {
+    setFiltrationParams(prevState => {
         let obj = prevState;
         obj[name] = newValue;
         return {...obj};
@@ -41,8 +40,8 @@ function setFilters(name, newValue) {
     }
 
   return (
-    <div className={props.open? 'filters-main-mobile': `filters-main`}>
-        {props.open? '' : <span className='filters-title'>Filters</span>}
+    <div className={active? 'filters-main-mobile': `filters-main`}>
+        {active? '' : <span className='filters-title'>Filters</span>}
         <form className='filters-form'>
             <label className='filters-label' htmlFor="from">From</label>
             <select required onChange={(e)=> setFilters(e.target.id, e.target.value)} className='filters-field filters-input' id="from">
@@ -99,10 +98,22 @@ function setFilters(name, newValue) {
             </select>
 
             <label className='filters-label' htmlFor="departure">Departure date</label>
-            <DatePicker id='dateFrom' selected={fromDate} value={fromDate} onChange={(date) => {setFromDate(date); setFilters('dateFrom', date)}} customInput={<ExampleCustomInput />}/>
+            <DatePicker
+                id='dateFrom'
+                selected={fromDate}
+                value={fromDate}
+                dateFormat="dd-MM-yyyy"
+                onChange={(date) => {setFromDate(date); setFilters('dateFrom', date)}}
+                customInput={<ExampleCustomInput />}
+            />
 
             <label className='filters-label' htmlFor="arrival">Arrival date</label>
-            <DatePicker selected={toDate} onChange={(date) => {setToDate(date); setFilters('dateTo', date)}} customInput={<ExampleCustomInput />} />
+            <DatePicker
+                selected={toDate}
+                dateFormat="dd-MM-yyyy"
+                onChange={(date) => {setToDate(date); setFilters('dateTo', date)}}
+                customInput={<ExampleCustomInput />}
+            />
 
             <label className='filters-label' htmlFor="weight">Size of delivarable</label>
             <select required className='filters-field' id="weight">
