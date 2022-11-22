@@ -44,7 +44,6 @@ export default function Home() {
             .catch(error => {
                 console.error(error);
             })
-
     }, []);
 
     useEffect(() => {
@@ -56,19 +55,48 @@ export default function Home() {
 
     const [showFilters, setShowFilters] = useState(false);
 
+    const [filtrationParams, setFiltrationParams] = useState(
+        {
+            'from': null,
+            'to': null,
+            'dateFrom': null,
+            'dateTo': null,
+            "isRewardable": null
+        });
+
+        
     const openFilters = () => {
         setShowFilters(prev => !prev);
-        console.log(showFilters);
     }
+
+
+
+    useEffect(() => {
+        let allArray = requests;
+        let fil = filtrationParams;
+        let newArray = allArray.filter(function (el) {
+            return ((el.from === fil.from) || fil.from === null)  &&
+                   ((el.to === fil.to) || fil.to === null) &&
+                   ((el.dateFrom === fil.dateFrom) || fil.dateFrom === null) &&
+                   ((el.dateTo === fil.dateTo) || fil.dateTo === null) &&
+                   ((el.isRewardable === fil.isRewardable) || fil.isRewardable === null);
+          });
+        setCards(newArray)        
+    }, [filtrationParams, requests])
     
 
   return (
     <div className='home-main'>
         <Header openFilters={openFilters} />
         <div className='home-container'>
-            <Filters open = {showFilters}/>
+            <Filters active = {showFilters} setFiltrationParams = {setFiltrationParams}/>
            
            {showFilters ? '' : <div className='cards-container'>
+                {cards.length === 0 ? 
+                    <div >
+                       <span>Unfortunately, there are no results for your query. Try changing the filters</span>
+                    </div> 
+                 : ''}
                 {cards.map((request, key) => (
                     <Card key={key} {...request}/>
                 ))}
