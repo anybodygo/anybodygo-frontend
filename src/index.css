@@ -21,10 +21,11 @@ code {
 
 .App {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     min-height: 105vh;
     overflow-x: hidden;
-
     margin: 0;
     padding: 0;
+    width: 100%;
 }

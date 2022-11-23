@@ -8,6 +8,7 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         redirectWindow.focus();
     }
 
+    console.log(dateFrom)
   return (
     <div className='card-main'>
         <div className='card-title'>
