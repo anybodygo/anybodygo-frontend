@@ -94,11 +94,19 @@
 
 
 @media (max-width: 480px) 
+    .card-main 
+        width: calc(100% - 16px)
     .card-text
         width: 95%
         margin-bottom: 3.5rem
     .card-title
-        max-width: 70%
+        max-width: calc(100% - 150px)
+    .card-info
+        display: flex
+        flex-direction: column
+        span:nth-child(2)
+            transform: translateX(-2px)
+
 
 
 

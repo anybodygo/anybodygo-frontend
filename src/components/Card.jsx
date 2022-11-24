@@ -1,5 +1,10 @@
 import React from 'react'
 import "../styles/css/Card.css";
+import * as dayjs from "dayjs";
+require('dayjs/locale/ru')
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+const localizedFormat = require('dayjs/plugin/localizedFormat')
+
 
 export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link }) {
     const redirectTo = (link) => {
@@ -8,7 +13,37 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         redirectWindow.focus();
     }
 
-    console.log(dateFrom)
+    dayjs.extend(customParseFormat);
+    dayjs.extend(localizedFormat);
+    function formatDate(stringDate) {
+        if (stringDate === null) return null;
+        const date = dayjs(stringDate, 'DD-MM-YYYY');
+        return date.locale('ru').format('D MMMM YYYY');
+    }
+
+    function rewardInfo() {
+        let color;
+        let title;
+        switch (isRewardable) {
+            case null:
+                color = '#9CA3AF';
+                title = 'Undefined reward';
+                break;
+            case true:
+                color = "#10B981";
+                title = 'Rewardable';
+                break
+            case false:
+                color = "#F59E0B";
+                title = 'Non rewardable';
+                break;                
+        }
+        return {
+            color: color,
+            title: title
+        }
+    }
+
   return (
     <div className='card-main'>
         <div className='card-title'>
@@ -30,6 +65,12 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
             </svg>
             <span>{ to }</span>
         </div>
+        <div className='card-reward'>
+                <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="3" cy="3" r="3" fill={rewardInfo().color}/>
+                </svg>
+              {rewardInfo().title}
+            </div>
         <div className='card-info'>
             {message &&
                 <span>
@@ -66,7 +107,7 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
                     strokeLinejoin="round"
                 />
                 </svg>
-                { dateFrom } - { dateTo }
+                { formatDate(dateFrom) } - { formatDate(dateTo) }
             </span>
         </div>
         <div className='card-subheader' onClick={() => redirectTo(chatLink)}>{ chatName }</div>
@@ -74,14 +115,6 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
             { context }
         </div>
         <button className='respond-btn' onClick={() => redirectTo(link)}>Respond in Telegram</button>
-        {isRewardable &&
-            <div className='card-reward'>
-                <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="3" cy="3" r="3" fill="#10B981"/>
-                </svg>
-                Rewardable
-            </div>
-        }
     </div>
   )
 }
