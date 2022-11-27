@@ -2,9 +2,7 @@ import React from 'react'
 import "../styles/css/Card.css";
 import * as dayjs from "dayjs";
 require('dayjs/locale/ru')
-const customParseFormat = require('dayjs/plugin/customParseFormat')
 const localizedFormat = require('dayjs/plugin/localizedFormat')
-dayjs.extend(customParseFormat);
 dayjs.extend(localizedFormat);
 
 
@@ -15,10 +13,9 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         redirectWindow.focus();
     }
 
-    function formatDate(stringDate) {
-        if (stringDate === null) return null;
-        const date = dayjs(stringDate, 'DD-MM-YYYY');
-        return date.locale('ru').format('D MMMM YYYY');
+    function formatDate(dateObject) {
+        if (dateObject === null) return null;
+        return dayjs(dateObject).locale('ru').format('D MMMM YYYY');
     }
 
     function getRewardInfo() {

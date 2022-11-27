@@ -3,6 +3,9 @@ import "../styles/css/Home.css";
 import Card from '../components/Card';
 import Filters from '../components/Filters';
 import {useNavigate} from "react-router-dom";
+import * as dayjs from "dayjs";
+const customParseFormat = require('dayjs/plugin/customParseFormat');
+dayjs.extend(customParseFormat);
 
 
 export default function Home({showFilters}) {
@@ -38,6 +41,7 @@ export default function Home({showFilters}) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                data = formatDate(data);
                 setRequests(data);
             })
             .catch(error => {
@@ -49,9 +53,18 @@ export default function Home({showFilters}) {
         setCards(requests);
     }, [requests])
 
+    function formatDate(arr) {
+        arr.forEach(obj => {
+            obj.dateFrom = dayjs(obj.dateFrom, 'DD-MM-YYYY', true).toDate();
+            obj.dateTo = dayjs(obj.dateTo, 'DD-MM-YYYY', true).toDate();           
+        })
+        return arr;
+    }
+
     //array of cards that will be displayed after filtration
     const [cards, setCards] = useState([...requests])
 
+    
     const [filtrationParams, setFiltrationParams] = useState(
         {
             'from': null,
@@ -61,16 +74,14 @@ export default function Home({showFilters}) {
             "isRewardable": null
         });
 
-
     useEffect(() => {
         let allArray = requests;
-        let fil = filtrationParams;
+        let filter = filtrationParams;
         let newArray = allArray.filter(function (el) {
-            return ((el.from === fil.from) || fil.from === null)  &&
-                   ((el.to === fil.to) || fil.to === null) &&
-                   ((el.dateFrom === fil.dateFrom) || fil.dateFrom === null) &&
-                   ((el.dateTo === fil.dateTo) || fil.dateTo === null) &&
-                   ((el.isRewardable === fil.isRewardable) || fil.isRewardable === null);
+            return ((el.from === filter.from) || filter.from === null)  &&
+                   ((el.to === filter.to) || filter.to === null) &&
+                   (filter.dateFrom === null || (el.dateFrom.getTime() >= filter.dateFrom.getTime())) &&
+                   (filter.dateTo === null || (el.dateTo.getTime() <= filter.dateTo.getTime()));
           });
         setCards(newArray)        
     }, [filtrationParams, requests])
