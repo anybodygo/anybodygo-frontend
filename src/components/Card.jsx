@@ -4,6 +4,8 @@ import * as dayjs from "dayjs";
 require('dayjs/locale/ru')
 const customParseFormat = require('dayjs/plugin/customParseFormat')
 const localizedFormat = require('dayjs/plugin/localizedFormat')
+dayjs.extend(customParseFormat);
+dayjs.extend(localizedFormat);
 
 
 export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link }) {
@@ -13,22 +15,16 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         redirectWindow.focus();
     }
 
-    dayjs.extend(customParseFormat);
-    dayjs.extend(localizedFormat);
     function formatDate(stringDate) {
         if (stringDate === null) return null;
         const date = dayjs(stringDate, 'DD-MM-YYYY');
         return date.locale('ru').format('D MMMM YYYY');
     }
 
-    function rewardInfo() {
+    function getRewardInfo() {
         let color;
         let title;
         switch (isRewardable) {
-            case null:
-                color = '#9CA3AF';
-                title = 'Undefined reward';
-                break;
             case true:
                 color = "#10B981";
                 title = 'Rewardable';
@@ -36,7 +32,11 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
             case false:
                 color = "#F59E0B";
                 title = 'Non rewardable';
-                break;                
+                break;    
+            default:
+                color = '#9CA3AF';
+                title = 'Undefined reward';
+                break;            
         }
         return {
             color: color,
@@ -67,9 +67,9 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         </div>
         <div className='card-reward'>
                 <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="3" cy="3" r="3" fill={rewardInfo().color}/>
+                    <circle cx="3" cy="3" r="3" fill={getRewardInfo().color}/>
                 </svg>
-              {rewardInfo().title}
+              {getRewardInfo().title}
             </div>
         <div className='card-info'>
             {message &&
