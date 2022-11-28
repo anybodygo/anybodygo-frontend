@@ -59,6 +59,22 @@ select:invalid
 select option 
     color: #4A5567 !important
 
+.react-datepicker__close-icon::after 
+    background: rgba(45, 212, 191, 1) !important
+    display: flex !important
+    align-items: center !important
+    justify-content: center !important
+
+.react-datepicker__close-icon
+    position: static !important
+
+.react-datepicker__input-container
+    display: flex !important
+    align-items: center
+    gap: 5px
+    flex-direction: row-reverse !important
+    transform: translateX(-30px)
+
 @media (max-width: 480px) 
     .filters-main
         display: none

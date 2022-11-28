@@ -1,4 +1,4 @@
-import React, {useState, forwardRef} from 'react'
+import React, { useState } from 'react'
 import "../styles/css/Filters.css"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,13 +10,12 @@ export default function Filters({ setFiltrationParams = f => f, active }) {
     const [fromDate, setFromDate] = useState(null);
     const [toDate, setToDate] = useState(null);
 
-      const destinations = ['Almaty', 'Antalya', 'Bali', 'Bangkok', 'Europe', 'Kas', 'Kazan', 
-                            'Krasnodar', 'Minsk', 'Moscow', 'Novosibirsk', 'Pangan', 'Rostov-on-Don', 
-                            'Russia', 'Seoul', 'Sheremetyevo', 'St.Petersburg', 'Sydney', 'Thailand', 
-                            'Turkey', 'Warsaw', 'Yekaterinburg']
+    const destinations = ['Almaty', 'Antalya', 'Bali', 'Bangkok', 'Europe', 'Kas', 'Kazan', 
+                          'Krasnodar', 'Minsk', 'Moscow', 'Novosibirsk', 'Pangan', 'Rostov-on-Don', 
+                          'Russia', 'Seoul', 'Sheremetyevo', 'St.Petersburg', 'Sydney', 'Thailand', 
+                          'Turkey', 'Warsaw', 'Yekaterinburg']
 
 
-  //filtration
 function setFilters(name, newValue) {
     //stringify the dates
     if (newValue !== null && typeof(newValue) === 'object') {
@@ -59,6 +58,7 @@ function setFilters(name, newValue) {
                 placeholderText={'Select'}
                 onChange={(date) => {setFromDate(date); setFilters('dateFrom', date)}}
                 className='filters-field'
+                isClearable
             />
 
             <label className='filters-label' htmlFor="arrival">End date</label>
@@ -69,6 +69,7 @@ function setFilters(name, newValue) {
                 dateFormat="dd-MM-yyyy"
                 onChange={(date) => {setToDate(date); setFilters('dateTo', date);}}
                 className='filters-field'
+                isClearable
             />
         </form>
     </div>
