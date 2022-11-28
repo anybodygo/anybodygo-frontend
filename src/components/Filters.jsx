@@ -5,25 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import * as dayjs from "dayjs";
 
 export default function Filters({ setFiltrationParams = f => f, active }) {
-//styling, ignore it
-    function buttonStyle(e) {
-        e.preventDefault();
-        // activeLink = document.querySelector("button.active");
-        if (document.querySelector("button.active")) {
-            document.querySelector("button.active").classList.remove('active')
-        }
-        e.target.classList.add('active')
-    }
 
     //datepickers
-    const [fromDate, setFromDate] = useState(new Date());
-    const [toDate, setToDate] = useState(new Date());
-    const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-        <button className="filters-field" onClick={(e)=> 
-            {e.preventDefault(); onClick()}} ref={ref}> 
-            {value}
-        </button>
-      ));
+    const [fromDate, setFromDate] = useState(null);
+    const [toDate, setToDate] = useState(null);
 
       const destinations = ['Almaty', 'Antalya', 'Bali', 'Bangkok', 'Europe', 'Kas', 'Kazan', 
                             'Krasnodar', 'Minsk', 'Moscow', 'Novosibirsk', 'Pangan', 'Rostov-on-Don', 
@@ -35,8 +20,8 @@ export default function Filters({ setFiltrationParams = f => f, active }) {
 function setFilters(name, newValue) {
     //stringify the dates
     if (newValue !== null && typeof(newValue) === 'object') {
-        newValue = dayjs(newValue).format('DD-MM-YYYY');
-        console.log(newValue);
+        //cut the hours, minutes and seconds that datepicker can put in
+        newValue = dayjs(newValue).startOf('D').toDate()
     }
     setFiltrationParams(prevState => {
         let obj = prevState;
@@ -49,6 +34,7 @@ function setFilters(name, newValue) {
     <div className={active? 'filters-main-mobile': `filters-main`}>
         {active? '' : <span className='filters-title'>Filters</span>}
         <form className='filters-form'>
+
             <label className='filters-label' htmlFor="from">From</label>
             <select required 
                 onChange={(e)=> setFilters(e.target.id, e.target.value)} 
@@ -65,41 +51,25 @@ function setFilters(name, newValue) {
                     {destinations.map(item=> <option>{item}</option>)}
             </select>
 
-            <label className='filters-label' htmlFor="departure">Departure date</label>
+            <label className='filters-label' htmlFor="departure">Start date</label>
             <DatePicker
                 id='dateFrom'
                 selected={fromDate}
-                value={fromDate}
                 dateFormat="dd-MM-yyyy"
+                placeholderText={'Select'}
                 onChange={(date) => {setFromDate(date); setFilters('dateFrom', date)}}
-                customInput={<ExampleCustomInput />}
+                className='filters-field'
             />
 
-            <label className='filters-label' htmlFor="arrival">Arrival date</label>
+            <label className='filters-label' htmlFor="arrival">End date</label>
             <DatePicker
-                selected={toDate}
+                id='dateTo'
+                selected= {toDate}
+                placeholderText={'Select'}
                 dateFormat="dd-MM-yyyy"
-                onChange={(date) => {setToDate(date); setFilters('dateTo', date)}}
-                customInput={<ExampleCustomInput />}
+                onChange={(date) => {setToDate(date); setFilters('dateTo', date);}}
+                className='filters-field'
             />
-
-            <label className='filters-label' htmlFor="weight">Size of delivarable</label>
-            <select required className='filters-field' id="weight">
-                <option value="" disabled selected hidden>Select</option>
-                <option>Up to 1kg</option>
-                <option>2kg</option>
-                <option>Large</option>
-            </select>
-
-            <label className='filters-label' for="reward">Reward</label>
-            <div className='reward-choice-container'>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', true)}} 
-                        className='reward-filter-btn reward-filter-btn-left '>Yes</button>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', false)}} 
-                        className='reward-filter-btn'>No</button>
-                <button onClick={(e)=>{buttonStyle(e); setFilters('isRewardable', null)}} 
-                        className='reward-filter-btn reward-filter-btn-right' >N/A</button>
-            </div>
         </form>
     </div>
   )
