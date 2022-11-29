@@ -24,9 +24,9 @@ function App() {
   return (
         <Router>
         <div className="App">
-            <Header openFilters = {openFilters}/>
+            <Header openFilters = {openFilters} filtersShown = {showFilters}/>
           <Routes>
-            <Route path="/" element={<Home showFilters={showFilters}/>}></Route>
+            <Route path="/" element={<Home showFilters={showFilters} openFilters = {openFilters}  />}></Route>
             <Route path="/requests/:id" element={<Request />}></Route>
           </Routes>
         </div>
