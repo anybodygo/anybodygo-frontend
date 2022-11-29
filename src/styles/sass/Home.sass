@@ -24,6 +24,29 @@
     align-items: center
     margin-top: 24px
 
+.lds-dual-ring 
+  display: inline-block
+  width: 45px
+  height: 45px
+  margin-top: 3rem
+
+.lds-dual-ring:after 
+  content: " "
+  display: block
+  width: 32px
+  height: 32px
+  border-radius: 50%
+  border: 6px solid $teal
+  border-color: $teal transparent $teal transparent
+  animation: lds-dual-ring 1.2s linear infinite
+
+@keyframes lds-dual-ring 
+  0% 
+    transform: rotate(0deg)
+
+  100% 
+    transform: rotate(360deg)
+
 
 @media (max-width: 480px) 
     .home-container

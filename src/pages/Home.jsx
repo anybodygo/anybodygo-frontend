@@ -8,7 +8,7 @@ import { filtrate } from '../functions/filtrate';
 import getHash from '../functions/getHash';
 
 
-export default function Home({showFilters}) {
+export default function Home({showFilters, openFilters = f => f}) {
 
     const hash = getHash();
 
@@ -22,6 +22,11 @@ export default function Home({showFilters}) {
     }, [hash, navigate])
 
     const { requests } = useRequests();
+
+    const [loading, setLoading] = useState(true);
+    if (requests.length > 0 && loading) {
+            setLoading(false);
+        }
 
     const [filtrationParams, setFiltrationParams] = useState(
         {
@@ -40,12 +45,17 @@ export default function Home({showFilters}) {
 
   return (
     <div className='home-main'>
-        <div className='home-container'>
-            <Filters active = {showFilters} setFiltrationParams = {setFiltrationParams}/>
+        <div className='home-container'>            
+            <Filters active = {showFilters} 
+                     setFiltrationParams = {setFiltrationParams} 
+                     filters = {filtrationParams}
+                     openFilters = {openFilters}
+                     />
            
             {showFilters ? '' : 
                 <div className='cards-container'>
-                    {requestsFiltered.length === 0 ? 
+                    {loading && <div className='lds-dual-ring'></div>}
+                    {requestsFiltered.length === 0 && !loading ? 
                         <div><span>Unfortunately, there are no results for your query. 
                                 Try changing the filters
                         </span></div> 
