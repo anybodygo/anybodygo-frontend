@@ -18,7 +18,7 @@ function App() {
   return (
         <div className="App">
             <Header openFilters = {openFilters} filtersShown = {showFilters}/>
-           <Home showFilters={showFilters} openFilters = {openFilters}  />
+            <Home showFilters={showFilters} openFilters = {openFilters}  />
         </div>
     );
 }

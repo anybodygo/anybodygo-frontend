@@ -63,7 +63,7 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
                     tabIndex='0'
                     onClick={()=> chooseOption(obj)}
                     className='input-option'
-                >{obj.name}</div>
+                >{obj.name}{ obj.parent ? `, ${obj.parent}` : ''}</div>
             )
             :<div className='input-option'><div className='loc-loading-icon'></div> Loading...</div>
         }
