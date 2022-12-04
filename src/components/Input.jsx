@@ -16,7 +16,6 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
                 {"type":"CityId","value":20000000,"name":"Бали","parent":"Индонезия","flag":null}
             ])
         } else {
-        console.log('sending request value ', input)
         fetch(process.env.REACT_APP_API_PREFIX + `/locations/search?q=${input}`)
         .then(response => response.json())
         .then(data => {
@@ -31,9 +30,14 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
     }, 1000, [input])
 
     function chooseOption(obj) {
-        setInput(obj.name);
-        setShowOptions(false);
+        if (obj === null) {
+            setInput('');
+        } else {
+            setInput(obj.name);
+        }
         setFilters(id, obj);
+        setShowOptions(false);
+       
     }
     
     function handleBlur(e) {

@@ -17,6 +17,8 @@ export default function Home({showFilters, openFilters = f => f}) {
             .then(response => response.json())
             .then(data => {
                 setRequests(data);
+                setLoading(false)
+                console.log(data)
             })
             .catch(error => {
                 console.error(error);
@@ -40,6 +42,8 @@ export default function Home({showFilters, openFilters = f => f}) {
     );
 
     useEffect(()=> {
+        setLoading(true)
+        setRequests([])
         let filters = [];
         if (filtrationParams.from) {
             filters.push(`from${filtrationParams.from.type}=${filtrationParams.from.value}`)
