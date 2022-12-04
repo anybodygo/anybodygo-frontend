@@ -30,11 +30,11 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
         let color;
         let title;
         switch (hasReward) {
-            case 1:
+            case true:
                 color = "#10B981";
                 title = 'Есть';
                 break
-            case 0:
+            case false:
                 color = "#F59E0B";
                 title = 'Нет';
                 break;    
@@ -53,10 +53,13 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
     if (message) {
         longText = (message.split(' ').length > 50);
     }
+
+    const disabled = dayjs(dateTo).toDate().getTime() < new Date().getTime()
+
   return (
-    <div className='card-main'>
-        <div onClick={openInPopup} className='card-title'>
-            <span>{ from }</span>
+    <div className={`card-main ${disabled ? ' disabled' : ''}`} onClick={openInPopup} >
+        <div className='card-title'>
+            <span>{ from.join(', ') }</span>
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 fillRule="evenodd"
@@ -72,7 +75,7 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
                 fill="black"
             />
             </svg>
-            <span>{ to }</span>
+            <span>{ to.join(', ') }</span>
         </div>
         <div className='card-reward'>
                 <svg width="13" height="14" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,24 +88,10 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
         <div className='card-info'>
             {context &&
                 <span>
-                    <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M8.00006 4.41667C8.25978 4.41667 8.47764 4.32897 8.65364
-                        4.15358C8.82903 3.97758 8.91672 3.75972 8.91672 3.5C8.91672 3.24028
-                        8.82903 3.02242 8.65364 2.84642C8.47764 2.67103 8.25978 2.58333 8.00006
-                        2.58333C7.74033 2.58333 7.52278 2.67103 7.34739 2.84642C7.17139 3.02242
-                        7.08339 3.24028 7.08339 3.5C7.08339 3.75972 7.17139 3.97758 7.34739
-                        4.15358C7.52278 4.32897 7.74033 4.41667 8.00006 4.41667ZM0.391724
-                        17.25L2.22506 4.41667H5.41047C5.36464 4.26389 5.32645 4.11478 5.29589
-                        3.96933C5.26534 3.8245 5.25006 3.66806 5.25006 3.5C5.25006 2.73611 5.51742
-                        2.08681 6.05214 1.55208C6.58686 1.01736 7.23617 0.75 8.00006 0.75C8.76395
-                        0.75 9.41325 1.01736 9.94797 1.55208C10.4827 2.08681 10.7501 2.73611
-                        10.7501 3.5C10.7501 3.66806 10.7348 3.8245 10.7042 3.96933C10.6737 4.11478
-                        10.6355 4.26389 10.5896 4.41667H13.7751L15.6084 17.25H0.391724Z"
-                        fill="#6B7280"
-                    />
+                    <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.6675 0.966735H10.6698L18.8605 5.94824C19.2782 6.20549 19.5325 6.66524 19.5325 7.14974V16.4797C19.5325 17.1817 19.171 17.8582 18.547 18.2317L10.6398 23.0362C10.4147 23.1749 10.1556 23.2483 9.89125 23.2483C9.62693 23.2483 9.3678 23.1749 9.14275 23.0362L1.23325 18.2302C0.93298 18.0473 0.68482 17.7902 0.512625 17.4836C0.34043 17.1771 0.24999 16.8313 0.25 16.4797V7.14974C0.25 6.67274 0.499 6.20399 0.931 5.94974L9.12925 0.962235C9.36182 0.822641 9.62813 0.749274 9.89938 0.750067C10.1706 0.750861 10.4365 0.825783 10.6683 0.966735H10.6675ZM9.895 2.25224L2.56225 6.71249L5.19475 8.32124L12.5372 3.85799L9.895 2.25149V2.25224ZM15.0062 5.35949L7.6525 9.82348L9.9025 11.1975L17.3312 6.77398L15.0062 5.35949ZM1.75 16.479C1.75 16.674 1.85275 16.8517 2.0125 16.9485L9.14725 21.2835V12.4942L6.82 11.073V12.414C6.82 12.594 6.625 12.699 6.475 12.6165L4.465 11.394C4.43285 11.3726 4.40646 11.3436 4.38815 11.3096C4.36984 11.2756 4.36017 11.2376 4.36 11.199V9.56999L1.75 7.97548V16.479ZM17.77 16.9485L17.776 16.9455C17.8552 16.8963 17.9204 16.8275 17.9653 16.7458C18.0103 16.6641 18.0334 16.5722 18.0325 16.479V8.10149L10.6465 12.5002V21.2767L17.7708 16.9485H17.77Z" fill="#6B7280"/>
                     </svg>
-                    { context }
+                    { context[0].toUpperCase() + context.slice(1) }
                 </span>
             }
             <span>
@@ -121,7 +110,7 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
             </span>
         </div>
         <div className='card-subheader'>{ chatName }</div>
-        <div onClick={openInPopup}  className={`card-text ${fullText? 'popup-card-text' : ''}`}>
+        <div  className={`card-text ${fullText? 'popup-card-text' : ''}`}>
             { message }
             {(longText && (fullText === false)) ? <div className='card-text-blur'></div> : ''}
         </div>

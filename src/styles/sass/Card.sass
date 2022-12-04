@@ -1,28 +1,11 @@
 @use './mixins.sass'
 @import './variables.sass'
 
-.popup-content
-    border-radius: 1rem !important
-    width: 684px !important
-    display: flex
-    flex-direction: column
-    gap: 2rem
-    align-items: center
-    margin-top: 24px
-    .popup-header
-        padding: 1rem
-
-@media (max-width: 480px)
-    .popup-content
-        width: 100vw
-        margin-top: 14px
-
-
 .card-main
     display: flex
     flex-direction: column
     padding: 24px
-    gap: 10px
+    gap: 8px
     width: 93%
     height: fit-content
     min-height: 150px
@@ -31,6 +14,10 @@
     margin: 0
     justify-content: flex-start
     position: relative
+    cursor: pointer
+
+.disabled
+    opacity: 60% !important
 
 .card-title
     font-weight: 700
@@ -40,10 +27,15 @@
 
 .card-info
     margin-right: 5px
+    display: flex
+    flex-direction: column
+    transform: translateY(-5px)
     span
         margin-right: 10px
         font-size: 16px
         color: $n-gray
+        svg
+            transform: translateY(3px)
         *
             margin-right: 5px
 
@@ -51,7 +43,6 @@
     font-size: 14px
     font-weight: 600
     margin-top: 0.5rem
-    cursor: pointer
     
 
 .card-text
@@ -62,7 +53,7 @@
     font-size: 16px
     line-height: 24px
     color: #374151
-    margin-bottom: 45px
+    margin-bottom: 55px
     height: fit-content
     overflow: visible
     position: relative
@@ -88,8 +79,6 @@
     position: absolute
     bottom: 0
     text-align: right
-    // transform: translateY(0.5rem)
-    // border: solid black 1px
     background: linear-gradient(0deg, #ffffff90 20%, #ffffff00 100%)
 
 
@@ -127,14 +116,8 @@
         width: calc(100% - 16px)
     .card-text
         width: 95%
-        margin-bottom: 3.5rem
     .card-title
         max-width: calc(100% - 150px)
-    .card-info
-        display: flex
-        flex-direction: column
-        span:nth-child(2)
-            transform: translateX(-2px)
 
 
 
