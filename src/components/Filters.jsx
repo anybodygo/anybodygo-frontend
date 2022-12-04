@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import "../styles/css/Filters.css"
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
-import * as dayjs from "dayjs";
 import Input from './Input.jsx';
 
 export default function Filters({ setFiltrationParams = f => f, active, filters, openFilters = f => f}) {
