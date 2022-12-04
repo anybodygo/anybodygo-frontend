@@ -50,7 +50,7 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
         if (filters[`${id}`] === null) {
             setInput('')
         }
-    }, [filters])
+    }, [filters, id])
 
   return (
     <div className='filters-loc-input-container' 
