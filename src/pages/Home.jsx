@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import "../styles/css/Home.css";
 import Card from '../components/Card';
 import Filters from '../components/Filters';
-import { useRequests } from '../functions/useRequests';
 import getHash from '../functions/getHash';
 import CardPopup from '../components/CardPopup';
 import * as dayjs from "dayjs";
@@ -73,7 +72,7 @@ export default function Home({showFilters, openFilters = f => f}) {
                 <div className='cards-container'>
                     {popupId && 
                     <CardPopup request={requests.filter(obj => {
-                        return String(obj.id) === popupId
+                        return obj.guid === popupId
                     })[0]} setPopupId = {setPopupId}/>
                     }
                     {loading && <div className='lds-dual-ring'></div>}

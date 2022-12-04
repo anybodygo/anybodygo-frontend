@@ -6,7 +6,7 @@ const localizedFormat = require('dayjs/plugin/localizedFormat')
 dayjs.extend(localizedFormat);
 
 
-export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link, setPopupId = f => f, fullText = false }) {
+export default function Card({ guid, chatName, from, to, dateFrom, dateTo, message, context, hasReward, messageLink, setPopupId = f => f, fullText = false }) {
 
     const redirectTo = (link) => {
         console.debug(`redirecting to ${link}`)
@@ -21,20 +21,20 @@ export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateT
 
     function openInPopup() {
         const url = new URL(window.location);
-        url.searchParams.set('hash', Number(id));
+        url.searchParams.set('hash', guid);
         window.history.pushState({}, '', url);
-        setPopupId(Number(id))
+        setPopupId(guid)
     }
 
     function getRewardInfo() {
         let color;
         let title;
-        switch (isRewardable) {
-            case true:
+        switch (hasReward) {
+            case 1:
                 color = "#10B981";
                 title = 'Есть';
                 break
-            case false:
+            case 0:
                 color = "#F59E0B";
                 title = 'Нет';
                 break;    
@@ -49,9 +49,9 @@ export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateT
         }
     }
 
-    let longText 
-    if (context) {
-        longText = (context.split(' ').length > 50);
+    let longText;
+    if (message) {
+        longText = (message.split(' ').length > 50);
     }
   return (
     <div className='card-main'>
@@ -83,7 +83,7 @@ export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateT
               {getRewardInfo().title}
             </div>
         <div className='card-info'>
-            {message &&
+            {context &&
                 <span>
                     <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -102,7 +102,7 @@ export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateT
                         fill="#6B7280"
                     />
                     </svg>
-                    { message }
+                    { context }
                 </span>
             }
             <span>
@@ -120,12 +120,12 @@ export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateT
                 { formatDate(dateFrom) } - { formatDate(dateTo) }
             </span>
         </div>
-        <div className='card-subheader' onClick={() => redirectTo(chatLink)}>{ chatName }</div>
+        <div className='card-subheader'>{ chatName }</div>
         <div onClick={openInPopup}  className={`card-text ${fullText? 'popup-card-text' : ''}`}>
-            { context }
+            { message }
             {(longText && (fullText === false)) ? <div className='card-text-blur'></div> : ''}
         </div>
-        <button className='respond-btn' onClick={() => redirectTo(link)}>Откликнуться в Telegram</button>
+        <button className='respond-btn' onClick={() => redirectTo(messageLink)}>Откликнуться в Telegram</button>
     </div>
   )
 }
