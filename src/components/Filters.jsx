@@ -11,15 +11,6 @@ export default function Filters({ setFiltrationParams = f => f, active, filters,
     const [toDate, setToDate] = useState(null);
 
     function setFilters(name, newValue) {
-        // if (newValue !== null && typeof(newValue) === 'object') {
-        //     //cut the hours, minutes and seconds that datepicker can put in
-        //     newValue = dayjs(newValue).startOf('D').toDate()
-        // }
-        // if (typeof(newValue) === 'object' && newValue.value) {
-                        
-        // }
-
-
         if (newValue === '') {
             newValue = null;
         }

@@ -5,18 +5,31 @@ import Filters from '../components/Filters';
 import { useRequests } from '../functions/useRequests';
 import getHash from '../functions/getHash';
 import CardPopup from '../components/CardPopup';
+import * as dayjs from "dayjs";
 
 export default function Home({showFilters, openFilters = f => f}) {
 
     const hash = getHash();
     const [popupId, setPopupId] = useState(hash);
 
-    const { requests } = useRequests();
+    const [requests, setRequests] = useState([]);
+    const fetchRequests = (query = '') => {
+        fetch(process.env.REACT_APP_API_PREFIX + `/requests${query}`)
+            .then(response => response.json())
+            .then(data => {
+                setRequests(data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+    useEffect(fetchRequests, []);
 
     const [loading, setLoading] = useState(true);
     if (requests.length > 0 && loading) {
-            setLoading(false);
-        }
+        setLoading(false);
+    }
 
     const [filtrationParams, setFiltrationParams] = useState(
         {
@@ -24,11 +37,28 @@ export default function Home({showFilters, openFilters = f => f}) {
             'to': null,
             'dateFrom': null,
             'dateTo': null
-        });
+        }
+    );
 
-    // useEffect(()=> {
-        
-    // }, [filtrationParams])
+    useEffect(()=> {
+        let filters = [];
+        if (filtrationParams.from) {
+            filters.push(`from${filtrationParams.from.type}=${filtrationParams.from.value}`)
+        }
+        if (filtrationParams.to) {
+            filters.push(`to${filtrationParams.to.type}=${filtrationParams.to.value}`)
+        }
+        if (filtrationParams.dateFrom) {
+            const date = dayjs(filtrationParams.dateFrom).format('YYYY-MM-DD');
+            filters.push(`dateFrom=${date}`)
+        }
+        if (filtrationParams.dateTo) {
+            const date = dayjs(filtrationParams.dateTo).format('YYYY-MM-DD');
+            filters.push(`dateTo=${date}`)
+        }
+        const query = '?' + filters.join('&');
+        fetchRequests(query);
+    }, [filtrationParams])
 
 
   return (
