@@ -70,7 +70,7 @@
 }
 
 .filters-input {
-  padding: 6px 12px;
+  padding: 6px 30px 6px 12px;
 }
 
 select:invalid {
@@ -84,6 +84,7 @@ select option {
 .filters-input-container {
   width: 90%;
   position: relative;
+  overflow-x: visible;
 }
 .filters-input-container button {
   position: absolute;

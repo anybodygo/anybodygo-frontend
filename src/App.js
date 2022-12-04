@@ -1,11 +1,5 @@
 import React, {useState} from 'react'
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route
-  } from "react-router-dom";
 import Home from './pages/Home.jsx'
-import Request from "./pages/Request";
 import Header from './components/Header';
 
 
@@ -22,15 +16,10 @@ function App() {
 
 
   return (
-        <Router>
         <div className="App">
             <Header openFilters = {openFilters} filtersShown = {showFilters}/>
-          <Routes>
-            <Route path="/" element={<Home showFilters={showFilters} openFilters = {openFilters}  />}></Route>
-            <Route path="/requests/:id" element={<Request />}></Route>
-          </Routes>
+           <Home showFilters={showFilters} openFilters = {openFilters}  />
         </div>
-      </Router>
     );
 }
 

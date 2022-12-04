@@ -1,39 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import 'reactjs-popup/dist/index.css';
-import Popup from "reactjs-popup";
-import {useNavigate} from "react-router-dom";
-import Card from "./Card";
+import React from 'react'
+import "../styles/css/CardPopup.css"
+import Card from './Card'
 
-export default function CardPopup({ id }) {
-    const [request, setRequest] = useState({});
+export default function CardPopup({request, setPopupId = f => f}) {
 
-    const navigate = useNavigate();
+    function closePopup() {
+        const url = new URL(window.location);
+        url.searchParams.delete('hash');
+        window.history.pushState({}, '', url);
+        setPopupId(null)
+    }
 
-    useEffect(() => {
-        fetch(process.env.REACT_APP_API_PREFIX + `/api/requests/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setRequest(data);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }, [id]);
 
-    return (
-        <Popup open={!!id} position="right center" onClose={() => navigate('/')} className='popup-card'>
-            <div className='popup-body'>
-                <div style={{display: 'flex'}} className='popup-header'>
-                    <span>Request details</span>
-                    <div style={{marginLeft: 'auto', display: 'flex'}}></div>
-                    <div style={{fontSize: '20px', cursor: 'pointer', display: 'flex'}} onClick={() => navigate('/')}>x</div>
+  return (
+    <div className='dark-hover'>
+        <div className='popup-main'>
+            <div className='popup-header'>
+                <span>Детали запроса</span>
+                <button onClick={closePopup} className='close-popup-btn'>
+                    <svg width="18" height="18" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" 
+                             d="M11.25 1.8075L10.1925 0.75L6 4.9425L1.8075 0.75L0.75
+                             1.8075L4.9425 6L0.75 10.1925L1.8075 11.25L6 7.0575L10.1925
+                             11.25L11.25 10.1925L7.0575 6L11.25 1.8075Z" fill="#6C6F80"/>
+                    </svg>
+                </button>
                 </div>
-                <hr/>
-                <div className='card-container'>
-                    <Card {...request}/>
-                </div>
+            <div className='popup-card-container'>
+                <Card {...request} setPopupId = {setPopupId} fullText = {true}></Card>  
             </div>
-        </Popup>
-    );
-};
+        </div>
+
+    </div>
+  )
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import CardPopup from "../components/CardPopup";
+import CardPopup from "../components/CardPopup1";
 import {useParams} from "react-router-dom";
 
 

@@ -1,47 +1,65 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../styles/css/Home.css";
 import Card from '../components/Card';
 import Filters from '../components/Filters';
-import {useNavigate} from "react-router-dom";
 import { useRequests } from '../functions/useRequests';
-import { filtrate } from '../functions/filtrate';
 import getHash from '../functions/getHash';
-
+import CardPopup from '../components/CardPopup';
+import * as dayjs from "dayjs";
 
 export default function Home({showFilters, openFilters = f => f}) {
 
     const hash = getHash();
+    const [popupId, setPopupId] = useState(hash);
 
-    const navigate = useNavigate();
+    const [requests, setRequests] = useState([]);
+    const fetchRequests = (query = '') => {
+        fetch(process.env.REACT_APP_API_PREFIX + `/requests${query}`)
+            .then(response => response.json())
+            .then(data => {
+                setRequests(data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
 
-    useEffect(() => {
-        if (hash) {
-            console.log(hash);
-            navigate(`/requests/${hash}`)
-        }
-    }, [hash, navigate])
-
-    const { requests } = useRequests();
+    useEffect(fetchRequests, []);
 
     const [loading, setLoading] = useState(true);
     if (requests.length > 0 && loading) {
-            setLoading(false);
-        }
+        setLoading(false);
+    }
 
     const [filtrationParams, setFiltrationParams] = useState(
         {
             'from': null,
             'to': null,
             'dateFrom': null,
-            'dateTo': null,
-            "isRewardable": null
-        });
+            'dateTo': null
+        }
+    );
 
-    const [requestsFiltered, setRequestsFiltered] = useState([...requests])
+    useEffect(()=> {
+        let filters = [];
+        if (filtrationParams.from) {
+            filters.push(`from${filtrationParams.from.type}=${filtrationParams.from.value}`)
+        }
+        if (filtrationParams.to) {
+            filters.push(`to${filtrationParams.to.type}=${filtrationParams.to.value}`)
+        }
+        if (filtrationParams.dateFrom) {
+            const date = dayjs(filtrationParams.dateFrom).format('YYYY-MM-DD');
+            filters.push(`dateFrom=${date}`)
+        }
+        if (filtrationParams.dateTo) {
+            const date = dayjs(filtrationParams.dateTo).format('YYYY-MM-DD');
+            filters.push(`dateTo=${date}`)
+        }
+        const query = '?' + filters.join('&');
+        fetchRequests(query);
+    }, [filtrationParams])
 
-    useEffect(() => {
-        setRequestsFiltered(filtrate(requests, filtrationParams))
-    }, [filtrationParams, requests])  
 
   return (
     <div className='home-main'>
@@ -51,16 +69,20 @@ export default function Home({showFilters, openFilters = f => f}) {
                      filters = {filtrationParams}
                      openFilters = {openFilters}
                      />
-           
             {showFilters ? '' : 
                 <div className='cards-container'>
+                    {popupId && 
+                    <CardPopup request={requests.filter(obj => {
+                        return String(obj.id) === popupId
+                    })[0]} setPopupId = {setPopupId}/>
+                    }
                     {loading && <div className='lds-dual-ring'></div>}
-                    {requestsFiltered.length === 0 && !loading ? 
+                    {requests.length === 0 && !loading ? 
                         <div><span>Unfortunately, there are no results for your query. 
                                 Try changing the filters
                         </span></div> 
-                     : requestsFiltered.map((request, key) => (
-                        <Card key={key} {...request}/>
+                     : requests.map((request, key) => (
+                        <Card key={key} {...request} setPopupId = {setPopupId}/>
                     ))}
                 </div>} 
         </div>
