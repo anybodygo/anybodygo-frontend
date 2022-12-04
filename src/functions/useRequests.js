@@ -4,7 +4,7 @@ const customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 
 export const useRequests = () => {
-    const [requests, setRequests] = useState([]);
+    const [requests, setRequests] = useState([]); 
 
     useEffect(() => {
         fetch(process.env.REACT_APP_API_PREFIX + "/api/requests")
@@ -22,7 +22,7 @@ export const useRequests = () => {
     function formatDate(arr) {
         arr.forEach(obj => {
             obj.dateFrom = dayjs(obj.dateFrom, 'DD-MM-YYYY', true).toDate();
-            obj.dateTo = dayjs(obj.dateTo, 'DD-MM-YYYY', true).toDate();           
+            obj.dateTo = dayjs(obj.dateTo, 'DD-MM-YYYY', true).toDate();       
         })
         return arr;
     }

@@ -53,7 +53,7 @@
         font-size: 14px
 
 .filters-input
-    padding: 6px 12px
+    padding: 6px 30px 6px 12px
 
 select:invalid
     color: #4a5567a7 !important
@@ -62,6 +62,7 @@ select option
 .filters-input-container
     width: 90%
     position: relative
+    overflow-x: visible
     button
         position: absolute
         top: 0
@@ -73,9 +74,45 @@ select option
         align-items: center
         justify-content: center
         cursor: pointer
-        background: transparent 
+        background: transparent  
 .filters-btn-container
-    display: none
+    // display: none
+
+.filters-btn-container
+    display: flex
+    width: calc(100% - 2rem)
+    margin-left: 1rem
+    justify-content: space-between
+    margin-top: 2rem
+    button
+        font-weight: 600
+        font-size: 14px
+        line-height: 20px
+.clear-filters-btn
+    border: none
+    background: transparent 
+    display: block
+    text-align: start
+    padding: 0
+    color: #4A5567
+    width: 40%
+    white-space: nowrap
+    margin-left: 2px
+.apply-filters-btn
+    color: rgba(31, 41, 55, 1)
+    @include mixins.button-1
+    font-weight: 600
+    font-size: 14px
+    line-height: 20px
+    width: fit-content
+    background: $bright-teal
+    padding: 10px 16px
+    bottom: 24px
+    right: 24px
+    cursor: pointer
+    width: 55%
+    &:hover
+        background: rgba(45, 212, 191, 1)
 
 @media (max-width: 480px) 
     .filters-main
@@ -96,42 +133,9 @@ select option
         .filters-input-container
             width: calc(100% - 2rem)
             margin-left: 1rem
-    .filters-btn-container
-        display: flex
-        width: calc(100% - 2rem)
-        margin-left: 1rem
-        justify-content: space-between
-        margin-top: 2rem
-        button
-            font-weight: 600
-            font-size: 14px
-            line-height: 20px
 
-    .clear-filters-btn
-        border: none
-        background: transparent 
-        display: block
-        text-align: start
-        padding: 0
-        color: #4A5567
-        width: 40%
-        white-space: nowrap
-        margin-left: 2px
-    .apply-filters-btn
-        color: rgba(31, 41, 55, 1)
-        @include mixins.button-1
-        font-weight: 600
-        font-size: 14px
-        line-height: 20px
-        width: fit-content
-        background: $bright-teal
-        padding: 10px 16px
-        bottom: 24px
-        right: 24px
-        cursor: pointer
-        width: 55%
-        &:hover
-            background: rgba(45, 212, 191, 1)
+    // .filters-field
+    //     margin-left: 1rem
 
 
 

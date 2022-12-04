@@ -6,7 +6,8 @@ const localizedFormat = require('dayjs/plugin/localizedFormat')
 dayjs.extend(localizedFormat);
 
 
-export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link }) {
+export default function Card({ id, chatName, chatLink, from, to, dateFrom, dateTo, message, context, isRewardable, link, setPopupId = f => f, fullText = false }) {
+
     const redirectTo = (link) => {
         console.debug(`redirecting to ${link}`)
         const redirectWindow = window.open(link, '_blank');
@@ -18,21 +19,28 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         return dayjs(dateObject).locale('ru').format('D MMMM YYYY');
     }
 
+    function openInPopup() {
+        const url = new URL(window.location);
+        url.searchParams.set('hash', Number(id));
+        window.history.pushState({}, '', url);
+        setPopupId(Number(id))
+    }
+
     function getRewardInfo() {
         let color;
         let title;
         switch (isRewardable) {
             case true:
                 color = "#10B981";
-                title = 'Rewardable';
+                title = 'Есть';
                 break
             case false:
                 color = "#F59E0B";
-                title = 'Non rewardable';
+                title = 'Нет';
                 break;    
             default:
                 color = '#9CA3AF';
-                title = 'Undefined reward';
+                title = 'Неизвестно';
                 break;            
         }
         return {
@@ -41,9 +49,13 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
         }
     }
 
+    let longText 
+    if (context) {
+        longText = (context.split(' ').length > 50);
+    }
   return (
     <div className='card-main'>
-        <div className='card-title'>
+        <div onClick={openInPopup} className='card-title'>
             <span>{ from }</span>
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -63,9 +75,11 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
             <span>{ to }</span>
         </div>
         <div className='card-reward'>
-                <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="3" cy="3" r="3" fill={getRewardInfo().color}/>
+                <svg width="13" height="14" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 3.00002H5V6.00002H1C0.734784 6.00002 0.48043 5.89466 0.292893 5.70712C0.105357 5.51959 0 5.26523 0 5.00002V4.00002C0 3.7348 0.105357 3.48045 0.292893 3.29291C0.48043 3.10537 0.734784 3.00002 1 3.00002H2.268C2.01993 2.57046 1.94034 2.06404 2.04469 1.5791C2.14904 1.09416 2.42987 0.665299 2.83267 0.375791C3.23546 0.0862838 3.73147 -0.04321 4.22437 0.0124545C4.71728 0.068119 5.17192 0.304969 5.5 0.677015C5.82808 0.304969 6.28272 0.068119 6.77563 0.0124545C7.26853 -0.04321 7.76454 0.0862838 8.16733 0.375791C8.57013 0.665299 8.85096 1.09416 8.95531 1.5791C9.05966 2.06404 8.98007 2.57046 8.732 3.00002H10C10.2652 3.00002 10.5196 3.10537 10.7071 3.29291C10.8946 3.48045 11 3.7348 11 4.00002V5.00002C11 5.26523 10.8946 5.51959 10.7071 5.70712C10.5196 5.89466 10.2652 6.00002 10 6.00002H6V3.00002ZM3 2.00002C3 2.26523 3.10536 2.51959 3.29289 2.70712C3.48043 2.89466 3.73478 3.00002 4 3.00002H5V2.00002C5 1.7348 4.89464 1.48044 4.70711 1.29291C4.51957 1.10537 4.26522 1.00002 4 1.00002C3.73478 1.00002 3.48043 1.10537 3.29289 1.29291C3.10536 1.48044 3 1.7348 3 2.00002ZM6 3.00002H7C7.19778 3.00002 7.39112 2.94137 7.55557 2.83148C7.72002 2.7216 7.84819 2.56542 7.92388 2.3827C7.99957 2.19997 8.01937 1.99891 7.98079 1.80492C7.9422 1.61094 7.84696 1.43276 7.70711 1.29291C7.56725 1.15306 7.38907 1.05782 7.19509 1.01923C7.00111 0.980645 6.80004 1.00045 6.61732 1.07614C6.43459 1.15182 6.27841 1.28 6.16853 1.44445C6.05865 1.60889 6 1.80223 6 2.00002V3.00002ZM10 7.00002H6V12H8C8.53043 12 9.03914 11.7893 9.41421 11.4142C9.78929 11.0392 10 10.5304 10 10V7.00002ZM5 12V7.00002H1V10C1 10.5304 1.21071 11.0392 1.58579 11.4142C1.96086 11.7893 2.46957 12 3 12H5Z"
+                    fill={getRewardInfo().color}/>
                 </svg>
+
               {getRewardInfo().title}
             </div>
         <div className='card-info'>
@@ -91,7 +105,6 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
                     { message }
                 </span>
             }
-
             <span>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -108,10 +121,11 @@ export default function Card({ chatName, chatLink, from, to, dateFrom, dateTo, m
             </span>
         </div>
         <div className='card-subheader' onClick={() => redirectTo(chatLink)}>{ chatName }</div>
-        <div className='card-text'>
+        <div onClick={openInPopup}  className={`card-text ${fullText? 'popup-card-text' : ''}`}>
             { context }
+            {(longText && (fullText === false)) ? <div className='card-text-blur'></div> : ''}
         </div>
-        <button className='respond-btn' onClick={() => redirectTo(link)}>Respond in Telegram</button>
+        <button className='respond-btn' onClick={() => redirectTo(link)}>Откликнуться в Telegram</button>
     </div>
   )
 }
