@@ -23,13 +23,12 @@ export default function Home({showFilters, openFilters = f => f}) {
             'from': null,
             'to': null,
             'dateFrom': null,
-            'dateTo': null,
-            "isRewardable": null
+            'dateTo': null
         });
 
-    useEffect(()=> {
-        console.log('Fetching filtered data...')
-    }, [filtrationParams])
+    // useEffect(()=> {
+        
+    // }, [filtrationParams])
 
 
   return (

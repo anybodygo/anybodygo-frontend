@@ -7,7 +7,7 @@ export const useRequests = () => {
     const [requests, setRequests] = useState([]); 
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_API_PREFIX + "/api/requests")
+        fetch(process.env.REACT_APP_API_PREFIX + "/requests")
             .then(response => response.json())
             .then(data => {
                 console.log(data);

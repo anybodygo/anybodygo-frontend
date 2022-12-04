@@ -10,22 +10,28 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
 
     useThrottledEffect(()=> {
         if (input === '') {
-            setOptions(['Default 1', 'Default 2', 'Default 3'])
+            setOptions([{"type":"CityId","value":4400,"name":"Москва","parent":"Россия","flag":null}, 
+            {"type":"CountryId","value":1280,"name":"Грузия","parent":null,"flag":null}, 
+            {"type":"CityId","value":20000000,"name":"Бали","parent":"Индонезия","flag":null} ])
         } else {
         console.log('sending request value ', input)
-        setOptions([])
-        setTimeout(()=> {
-            const response = [`${Math.random()}`, `${Math.random()}`, `${Math.random()}`];
-            setOptions(response); 
-        }, 1000)
+        fetch(process.env.REACT_APP_API_PREFIX + `/locations/search?q=${input}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            setOptions(data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
 
         }
     }, 1000, [input])
 
-    function chooseOption(str) {
-        setInput(str);
+    function chooseOption(obj) {
+        setInput(obj.name);
         setShowOptions(false);
-        setFilters(id, str);
+        setFilters(id, obj);
     }
     
     function handleBlur(e) {
@@ -49,8 +55,9 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
 
         {(showOptions) && 
         <div className='input-options-container'>
-            {options.length ? options.map(str => 
-            <div tabIndex='0' onClick={(e)=> chooseOption(e.target.innerText)} className='input-option'>{str}</div>
+            {options && options.length ? options.map(obj => 
+            <div tabIndex='0' 
+             onClick={(e)=> chooseOption(obj)} className='input-option'>{obj.name}</div>
             )
             :<div className='input-option'><div className='loc-loading-icon'></div> Loading...</div>
         }
