@@ -59,7 +59,7 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
   return (
     <div className={`card-main ${disabled ? ' disabled' : ''}`} onClick={openInPopup} >
         <div className='card-title'>
-            <span>{ from.join(', ') }</span>
+            <span>{ from }</span>
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 fillRule="evenodd"
@@ -75,7 +75,7 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
                 fill="black"
             />
             </svg>
-            <span>{ to.join(', ') }</span>
+            <span>{ to }</span>
         </div>
         <div className='card-reward'>
                 <svg width="13" height="14" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
