@@ -54,8 +54,11 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
         longText = (message.split(' ').length > 50);
     }
 
+    const disabled = (dayjs(dateTo).add(2, 'day').toDate().getTime() < new Date().getTime());
+
+
   return (
-    <div className={`card-main`} onClick={openInPopup} >
+    <div className={`card-main ${disabled ? 'disabled' : ''}`} onClick={openInPopup} >
         <div className='card-title'>
             <span>{ from }</span>
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">

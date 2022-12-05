@@ -28,9 +28,6 @@ export default function Home({showFilters, openFilters = f => f}) {
     useEffect(fetchRequests, []);
 
     const [loading, setLoading] = useState(true);
-    if (requests.length > 0 && loading) {
-        setLoading(false);
-    }
 
     const [filtrationParams, setFiltrationParams] = useState(
         {
@@ -42,8 +39,8 @@ export default function Home({showFilters, openFilters = f => f}) {
     );
 
     useEffect(()=> {
-        setLoading(true)
-        setRequests([])
+        setLoading(true);
+        setRequests([]);
         let filters = [];
         if (filtrationParams.from) {
             filters.push(`from${filtrationParams.from.type}=${filtrationParams.from.value}`)
@@ -63,7 +60,6 @@ export default function Home({showFilters, openFilters = f => f}) {
         fetchRequests(query);
     }, [filtrationParams])
 
-
   return (
     <div className='home-main'>
         <div className='home-container'>            
@@ -75,15 +71,15 @@ export default function Home({showFilters, openFilters = f => f}) {
             {showFilters ? '' : 
                 <div className='cards-container'>
                     {popupId && 
-                    <CardPopup request={requests.filter(obj => {
-                        return obj.guid === popupId
-                    })[0]} setPopupId = {setPopupId}/>
+                    <CardPopup guid = {popupId} setPopupId = {setPopupId}/>
                     }
                     {loading && <div className='lds-dual-ring'></div>}
                     {requests.length === 0 && !loading ? 
-                        <div><span>Unfortunately, there are no results for your query. 
-                                Try changing the filters
-                        </span></div> 
+                        <div className='no-results-message'>
+                            <span>К сожалению, по Вашему запросу нет результатов. 
+                                Попробуйте изменить фильтры
+                            </span>
+                        </div> 
                      : requests.map((request, key) => (
                         <Card key={key} {...request} setPopupId = {setPopupId}/>
                     ))}

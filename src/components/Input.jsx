@@ -36,8 +36,7 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
             setInput(obj.name);
         }
         setFilters(id, obj);
-        setShowOptions(false);
-       
+        setShowOptions(false);    
     }
     
     function handleBlur(e) {
