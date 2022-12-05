@@ -76,4 +76,9 @@
   .filter {
     display: none;
   }
+  .no-results-message {
+    max-width: calc(100% - 2rem);
+    overflow: hidden;
+    margin-top: 0.5rem;
+  }
 }/*# sourceMappingURL=Home.css.map */
