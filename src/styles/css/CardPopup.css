@@ -20,6 +20,7 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  min-width: 700px;
   max-width: 800px;
 }
 
@@ -53,4 +54,10 @@
 .popup-card-container > * {
   width: 100% !important;
   cursor: default !important;
+}
+
+@media (max-width: 480px) {
+  .popup-main {
+    min-width: 100vw;
+  }
 }/*# sourceMappingURL=CardPopup.css.map */
