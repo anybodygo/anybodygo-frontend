@@ -65,11 +65,15 @@ export default function Home({showFilters, openFilters = f => f}) {
         }
         const query = '?page=' + currentPage + '&' + filters.join('&');
         fetchRequests(query);
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'auto'
-        });
+        //0 timeout resolves the blinking bug with scroll method called during react re-render
+        setTimeout(()=> {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'auto'
+            })
+        }, 0)
+
     }, [filtrationParams, currentPage])
 
 
