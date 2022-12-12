@@ -54,7 +54,8 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
         longText = (message.split(' ').length > 50);
     }
 
-    const disabled = (dayjs(dateTo).add(2, 'day').toDate().getTime() < new Date().getTime());
+    // const disabled = (dayjs(dateTo).add(2, 'day').toDate().getTime() < new Date().getTime());
+    const disabled = false;
 
 
   return (

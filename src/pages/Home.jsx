@@ -4,6 +4,7 @@ import Card from '../components/Card';
 import Filters from '../components/Filters';
 import getHash from '../functions/getHash';
 import CardPopup from '../components/CardPopup';
+import Pagination from '../components/Pagination';
 import * as dayjs from "dayjs";
 
 export default function Home({showFilters, openFilters = f => f}) {
@@ -12,11 +13,20 @@ export default function Home({showFilters, openFilters = f => f}) {
     const [popupId, setPopupId] = useState(hash);
 
     const [requests, setRequests] = useState([]);
+
+    const [requestsNumber, setRequestsNumber] = useState();
+
+    const [loading, setLoading] = useState(true);
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+
     const fetchRequests = (query = '') => {
         fetch(process.env.REACT_APP_API_PREFIX + `/requests${query}`)
             .then(response => response.json())
             .then(data => {
-                setRequests(data);
+                setRequests(data.data);
+                setRequestsNumber(data.total)
                 setLoading(false)
                 console.log(data)
             })
@@ -25,9 +35,6 @@ export default function Home({showFilters, openFilters = f => f}) {
             })
     }
 
-    useEffect(fetchRequests, []);
-
-    const [loading, setLoading] = useState(true);
 
     const [filtrationParams, setFiltrationParams] = useState(
         {
@@ -56,9 +63,15 @@ export default function Home({showFilters, openFilters = f => f}) {
             const date = dayjs(filtrationParams.dateTo).format('YYYY-MM-DD');
             filters.push(`dateTo=${date}`)
         }
-        const query = '?' + filters.join('&');
+        const query = '?page=' + currentPage + '&' + filters.join('&');
         fetchRequests(query);
-    }, [filtrationParams])
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'auto'
+        });
+    }, [filtrationParams, currentPage])
+
 
   return (
     <div className='home-main'>
@@ -67,6 +80,7 @@ export default function Home({showFilters, openFilters = f => f}) {
                      setFiltrationParams = {setFiltrationParams} 
                      filters = {filtrationParams}
                      openFilters = {openFilters}
+                     setCurrentPage = {setCurrentPage}
                      />
             {showFilters ? '' : 
                 <div className='cards-container'>
@@ -83,6 +97,12 @@ export default function Home({showFilters, openFilters = f => f}) {
                      : requests.map((request, key) => (
                         <Card key={key} {...request} setPopupId = {setPopupId}/>
                     ))}
+                    {(requests.length !== 0 && requestsNumber > 10)&&
+                    <Pagination responsesCount = {requestsNumber}
+                                currentPage = {currentPage}
+                                setCurrentPage = {setCurrentPage}
+                     />
+                    }
                 </div>} 
         </div>
     </div>
