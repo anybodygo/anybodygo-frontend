@@ -19,7 +19,6 @@ export default function Input({id, setFilters = f => f, clearFilter = f => f, fi
         fetch(process.env.REACT_APP_API_PREFIX + `/locations/search?q=${input}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setOptions(data);
         })
         .catch(error => {

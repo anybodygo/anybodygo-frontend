@@ -1,0 +1,90 @@
+@use './mixins.sass'
+@import './variables.sass'
+
+.pagination-main
+    display: flex
+    justify-content: space-between
+    width: 93%
+    align-items: center
+    height: 4rem
+    padding: 0px 5px
+    border-top: solid rgba(229, 231, 235, 1) 1px
+
+.pagination-results-count
+    font-weight: 400
+    font-size: 14px
+    line-height: 20px
+    color: #374151
+    min-width: fit-content
+    width: 27%
+
+.pagination-pages-container
+    height: 100% 
+    display: flex
+    justify-content: space-around
+    align-items: center
+    padding: 0 1rem
+    gap: 10px
+    span 
+        font-weight: bold
+        font-size: 14px
+        line-height: 20px
+        text-align: center
+        color: #6B7280
+        padding: 4px
+        cursor: pointer
+        position: relative
+        &:hover
+            color: black
+
+.page-active
+    color: black !important
+    
+    
+
+.page-number-active
+    color: black
+    &::before
+        content: ''
+        position: absolute
+        width: 10px
+        height: 2px
+        background: #14B8A6
+
+.pagination-btns-container
+    // width: 20%
+    height: 100%
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: 10px
+    width: fit-content
+
+.pagination-btn
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    padding: 10px 16px
+    background: #F8FAFC
+    border-radius: 2px
+    font-weight: 600
+    font-size: 14px
+    line-height: 20px
+    color: #0D9488
+    border: none
+    cursor: pointer
+    &:hover
+        background: $shallow-green
+
+@media (max-width: 480px) 
+    .pagination-main
+        width: calc(100% - 16px)
+        padding: 0 10px
+    .pagination-pages-container
+        display: none
+    .pagination-results-count
+        width: fit-content
+
+
+
