@@ -6,7 +6,7 @@ const localizedFormat = require('dayjs/plugin/localizedFormat')
 dayjs.extend(localizedFormat);
 
 
-export default function Card({ guid, chatName, from, to, dateFrom, dateTo, message, context, hasReward, messageLink, setPopupId = f => f, fullText = false }) {
+export default function Card({ guid, id, chatName, from, to, dateFrom, dateTo, message, context, hasReward, messageLink, setPopupId = f => f, fullText = false }) {
 
     const redirectTo = (link) => {
         console.debug(`redirecting to ${link}`)
@@ -116,7 +116,15 @@ export default function Card({ guid, chatName, from, to, dateFrom, dateTo, messa
             { message }
             {(longText && (fullText === false)) ? <div className='card-text-blur'></div> : ''}
         </div>
-        <button className='respond-btn' onClick={() => redirectTo(messageLink)}>Откликнуться в Telegram</button>
+        <div className='card__actions-container'>
+            <a href={`https://t.me/AnybodyGoBot?request_id=${id}`} target="_blank"  className='redact-btn'>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.8898 2.11019C15.0762 1.2966 13.7571 1.2966 12.9435 2.11019L1.50006 13.5537V16.5296H4.41673L15.8898 5.05647C16.7034 4.24288 16.7034 2.92379 15.8898 2.11019Z" fill="#F3F4F6"/>
+                    <path d="M15.8898 2.11019L16.5969 1.40309V1.40309L15.8898 2.11019ZM4.41673 16.5296V17.5296C4.68194 17.5296 4.9363 17.4242 5.12383 17.2367L4.41673 16.5296ZM1.50006 16.5296H0.500061C0.500061 17.0819 0.947776 17.5296 1.50006 17.5296L1.50006 16.5296ZM1.50006 13.5537L0.792954 12.8466C0.605418 13.0341 0.500061 13.2885 0.500061 13.5537H1.50006ZM13.6507 2.8173C14.0737 2.39423 14.7596 2.39423 15.1827 2.8173L16.5969 1.40309C15.3928 0.198971 13.4406 0.198971 12.2364 1.40309L13.6507 2.8173ZM15.1827 2.8173C15.6058 3.24037 15.6058 3.9263 15.1827 4.34937L16.5969 5.76358C17.801 4.55946 17.801 2.6072 16.5969 1.40309L15.1827 2.8173ZM15.1827 4.34937L3.70962 15.8225L5.12383 17.2367L16.5969 5.76358L15.1827 4.34937ZM4.41673 15.5296H1.50006V17.5296H4.41673V15.5296ZM12.2364 1.40309L0.792954 12.8466L2.20717 14.2608L13.6507 2.8173L12.2364 1.40309ZM0.500061 13.5537V16.5296H2.50006V13.5537H0.500061ZM10.9864 4.0673L13.9327 7.01358L15.3469 5.59937L12.4007 2.65309L10.9864 4.0673Z" fill="#374151"/>
+                </svg>
+            </a>
+            <button className='respond-btn' onClick={() => redirectTo(messageLink)}>Откликнуться в Telegram</button>
+        </div>
     </div>
   )
 }

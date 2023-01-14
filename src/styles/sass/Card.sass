@@ -81,6 +81,15 @@
     text-align: right
     background: linear-gradient(0deg, #ffffff90 20%, #ffffff00 100%)
 
+.card__actions-container 
+    position: absolute
+    height: 40px
+    width: calc( 100% - 48px )
+    bottom: 20px
+    display: flex
+    justify-content: flex-end
+    gap: 7px
+    align-items: center
 
 .respond-btn
     @include mixins.button-1
@@ -90,13 +99,22 @@
     width: fit-content
     background: $bright-teal
     color: black
-    position: absolute
     padding: 10px 16px
-    bottom: 24px
-    right: 24px
-    cursor: pointer
     &:hover
         background: rgba(45, 212, 191, 1)
+
+.redact-btn 
+    height: 40px
+    width: 40px
+    border-radius: 34px
+    background: #F3F4F6
+    display: flex
+    justify-content: center
+    align-items: center
+    border: none
+    &:hover 
+        background: #e9ebed
+
 
 .card-reward
     @include mixins.button-1
@@ -118,7 +136,3 @@
         width: 95%
     .card-title
         max-width: calc(100% - 150px)
-
-
-
-
