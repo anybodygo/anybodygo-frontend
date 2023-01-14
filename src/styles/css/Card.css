@@ -94,6 +94,17 @@
   background: linear-gradient(0deg, rgba(255, 255, 255, 0.5647058824) 20%, rgba(255, 255, 255, 0) 100%);
 }
 
+.card__actions-container {
+  position: absolute;
+  height: 40px;
+  width: calc(100% - 48px);
+  bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+  align-items: center;
+}
+
 .respond-btn {
   border: none;
   display: flex;
@@ -112,14 +123,24 @@
   width: fit-content;
   background: #5EEAD4;
   color: black;
-  position: absolute;
   padding: 10px 16px;
-  bottom: 24px;
-  right: 24px;
-  cursor: pointer;
 }
 .respond-btn:hover {
   background: rgb(45, 212, 191);
+}
+
+.redact-btn {
+  height: 40px;
+  width: 40px;
+  border-radius: 34px;
+  background: #F3F4F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+.redact-btn:hover {
+  background: #e9ebed;
 }
 
 .card-reward {

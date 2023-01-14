@@ -11,12 +11,13 @@
     font-size: 14px
     line-height: 32px
     color: #6B7280
+    margin-top: 10px
 
 .filters-title
     font-weight: 600
     font-size: 20px
     line-height: 28px
-    margin-bottom: 16px
+    margin-bottom: 0px
     margin-top: 24px
 
 .filters-form
@@ -77,10 +78,21 @@ select option
         background: transparent  
 .filters-btn-container
     display: none
+.clear-filters-btn-desktop
+    @include mixins.button-1
+    background: #F8FAFC
+    color: #4A5567
+    width: 90%
+    height: 2rem
+    margin-top: 32px
+    &:hover 
+        background: #f3f5f7
 
 
 @media (max-width: 480px) 
     .filters-main
+        display: none
+    .clear-filters-btn-desktop
         display: none
     .filters-main-mobile
         width: 100%
@@ -110,8 +122,6 @@ select option
             font-size: 14px
             line-height: 20px
     .clear-filters-btn
-        border: none
-        background: transparent 
         display: block
         text-align: start
         padding: 0
@@ -135,15 +145,7 @@ select option
         &:hover
             background: rgba(45, 212, 191, 1)
 
-        // .filters-field
-        //     margin-left: 1rem
-
 
 
 
         
-
-
-
-
-
