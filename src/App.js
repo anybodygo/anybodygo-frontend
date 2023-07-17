@@ -7,6 +7,7 @@ import {
 import Home from './pages/Home.jsx'
 import Request from "./pages/Request";
 import Header from './components/Header';
+import Offer from "./pages/Offer";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home showFilters={showFilters}/>}></Route>
             <Route path="/requests/:id" element={<Request />}></Route>
+            <Route path="/offers/:id" element={<Offer />}></Route>
           </Routes>
         </div>
       </Router>

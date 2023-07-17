@@ -23,8 +23,6 @@
   padding: 24px;
   gap: 10px;
   width: 93%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   min-height: 150px;
   background: white;
@@ -85,8 +83,6 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   background: #5EEAD4;
   color: black;
@@ -111,8 +107,6 @@
   border-radius: 16px;
   font-weight: 700;
   border: solid 1px #ababab;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
   position: absolute;
   top: 24px;
@@ -130,4 +124,6 @@
   .card-title {
     max-width: 70%;
   }
-}/*# sourceMappingURL=Card.css.map */
+}
+
+/*# sourceMappingURL=Card.css.map */

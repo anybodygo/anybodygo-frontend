@@ -26,9 +26,7 @@
 
 .filters-field {
   width: 90%;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   display: flex;
   align-items: center;
   padding: 6px 12px;
@@ -120,4 +118,6 @@ select option {
     width: 80%;
     margin-left: 3rem;
   }
-}/*# sourceMappingURL=Filters.css.map */
+}
+
+/*# sourceMappingURL=Filters.css.map */
